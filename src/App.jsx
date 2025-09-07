@@ -28,6 +28,10 @@ import  CustomerHelp  from "./supportPages/Help";
 import Help from "./supportPages/Help";
 import FAQsPage from "./supportPages/Faqs";
 import NotificationSettings from "./supportPages/NotifiactionExpiry";
+import QuickSeasonalRecipes from "./companyPages/QuickSeasonalRecipes";
+import StoreVegetables from "./companyPages/StoreVegetables";
+
+
 
 
 const App = () => {
@@ -75,9 +79,12 @@ const App = () => {
           <Route path="/Help" element={<CustomerHelp/>} />
           <Route path="/Faqs" element={<FAQsPage/>} />
           <Route path="/NotificationSettings" element={<NotificationSettings/>} />
+         <Route path="/quick-seasonal-recipes" element={<QuickSeasonalRecipes />} />
+         <Route path="/store-vegetables" element={<StoreVegetables />} />
+
          
           
-          
+          {/* this is seller route and paths */}
           <Route
             path="/seller"
             element={isSeller ? <SellerLayout /> : <SellerLogin />}

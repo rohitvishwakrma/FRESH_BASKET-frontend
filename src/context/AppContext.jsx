@@ -69,7 +69,13 @@ export const AppContextProvider = ({ children }) => {
     }
 
     setCartItems(cartData);
-    toast.success("Added to cart");
+    const product = products.find((p) => p._id === itemId);
+    if (product && product.expiryDate) {
+      const formattedDate = new Date(product.expiryDate).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+      toast.success(`Added to cart. Expiry: ${formattedDate}`);
+    } else {
+      toast.success("Added to cart");
+    }
   };
 
   // update cart item quantity

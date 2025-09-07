@@ -4,15 +4,13 @@ import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
-    
     id: 1,
     title: "Top 5 Healthy Fruits You Should Buy This Season",
     date: "2025-08-01",
     excerpt:
       "Discover the freshest fruits packed with nutrients that can boost your health and energy.",
-    lengthink: "Home",
     image: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80",
-    name:"Home",
+    link: "/products", // example path
   },
   {
     id: 2,
@@ -20,9 +18,8 @@ const blogPosts = [
     date: "2025-07-15",
     excerpt:
       "Simple tips to prolong the freshness of your groceries and reduce food waste.",
-    lengthink: "Home",
     image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&q=80",
-    name:"ProductCategory"
+    link: "/store-vegetables", // example path
   },
   {
     id: 3,
@@ -31,9 +28,8 @@ const blogPosts = [
     excerpt:
       "Try these delicious recipes made from fresh groceries delivered by Fresh Basket.",
     image: "https://images.unsplash.com/photo-1514517181577-c07ec9dbd9cc?w=600&q=80",
-    name:"product"
+    link: "/quick-seasonal-recipes", 
   },
-
 ];
 
 export default function BlogSection() {
@@ -48,11 +44,10 @@ export default function BlogSection() {
         From Our Blog
       </h2>
       <div className="grid md:grid-cols-3 gap-8">
-        {blogPosts.map(({ id, title, date, excerpt, image }) => (
+        {blogPosts.map(({ id, title, date, excerpt, image, link }) => (
           <article
             key={id}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"
-            onClick={() => window.location.href = "/"}
+            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
             <img
               src={image}
@@ -71,12 +66,12 @@ export default function BlogSection() {
                 {title}
               </h3>
               <p className="text-gray-600">{excerpt}</p>
-              <a
-                href="Products "
+              <Link
+                to={link}
                 className="inline-block mt-4 text-green-700 font-semibold hover:underline"
               >
                 Read More →
-              </a>
+              </Link>
             </div>
           </article>
         ))}
