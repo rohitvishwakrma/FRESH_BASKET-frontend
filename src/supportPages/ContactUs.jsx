@@ -34,15 +34,15 @@ const ContactUs = () => {
 
           <div className="space-y-4">
             <div>
-              <h4 className="text-lg font-semibold text-gray-800"><i class="ri-map-pin-fill" style={{color:"green"}}></i> Address</h4>
+              <h4 className="text-lg font-semibold text-gray-800"><i className="ri-map-pin-fill" style={{color:"gray"}}></i> Address</h4>
               <p className="text-gray-600">123 Main Street, New Delhi, India</p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold text-gray-800"><i class="ri-phone-fill" style={{color:"gray"}}></i> Phone</h4>
+              <h4 className="text-lg font-semibold text-gray-800"><i className="ri-phone-fill" style={{color:"gray"}}></i> Phone</h4>
               <p className="text-gray-600">+91 98765 43210</p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold text-gray-800"><i class="ri-mail-line" style={{color:"gray"}}></i> Email</h4>
+              <h4 className="text-lg font-semibold text-gray-800"><i className="ri-mail-line" style={{color:"gray"}}></i> Email</h4>
               <p className="text-gray-600">support@example.com</p>
             </div>
           </div>

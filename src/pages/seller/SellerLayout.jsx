@@ -29,40 +29,42 @@ const SellerLayout = () => {
   };
   return (
     <>
-      <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white transition-all duration-300">
+  <div className="flex items-center justify-between px-8 md:px-20 border-b border-gray-200 py-6 bg-gray-50 shadow-lg transition-all duration-300">
         <Link to={"/"}>
-          <h1 className="text-2xl font-semibold">Grocery Store App</h1>
+          <h1 className="text-4xl font-bold text-green-700 tracking-wide drop-shadow">Seller Dashboard</h1>
         </Link>
-        <div className="flex items-center gap-5 text-gray-500">
-          <p>Hi! Admin</p>
+        <div className="flex items-center gap-8 text-gray-700">
+          <p className="text-lg font-medium">Hi, Seller!</p>
           <button
             onClick={logout}
-            className="border rounded-full text-sm px-4 py-1 cursor-pointer"
+            className="border-2 border-green-600 rounded-full text-base px-6 py-2 font-semibold bg-green-600 hover:bg-green-700 text-white shadow transition-all"
           >
             Logout
           </button>
         </div>
       </div>
-      <div className="flex">
-        <div className="md:w-64 w-16 border-r h-[95vh] text-base border-gray-300 pt-4 flex flex-col ">
+  <div className="flex min-h-screen w-full bg-gray-50">
+        <div className="md:w-80 w-20 border-r h-full text-lg border-gray-200 pt-8 flex flex-col bg-white shadow-lg">
           {sidebarLinks.map((item) => (
             <NavLink
               to={item.path}
               key={item.name}
               end={item.path === "/seller"}
-              className={({ isActive }) => `flex items-center py-3 px-4 gap-3 
+              className={({ isActive }) => `flex items-center py-4 px-6 gap-4 rounded-lg mx-2 my-2 transition-all duration-200
                             ${
                               isActive
-                                ? "border-r-4 md:border-r-[6px] bg-indigo-500/10 border-indigo-500 text-indigo-500"
-                                : "hover:bg-gray-100/90 border-white "
+                                ? "bg-green-100 text-green-700 font-bold shadow border-l-4 border-green-600"
+                                : "hover:bg-gray-50 text-gray-700"
                             }`}
             >
-              <img src={item.icon} alt="" className="w-7 h-7" />
-              <p className="md:block hidden text-center">{item.name}</p>
+              <img src={item.icon} alt="" className="w-8 h-8" />
+              <span className="md:block hidden text-center">{item.name}</span>
             </NavLink>
           ))}
         </div>
-        <Outlet />
+        <div className="flex-1 bg-gray-50 p-8">
+          <Outlet />
+        </div>
       </div>
     </>
   );

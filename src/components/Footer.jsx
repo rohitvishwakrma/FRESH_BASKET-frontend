@@ -6,15 +6,16 @@ import 'remixicon/fonts/remixicon.css';
 const companyLinks = [
   { name: "About", path: "/About" },
   { name: "Careers", path: "/careers" },
-  { name: "Press", path: "/press" },
+  { name: "Article", path: "/article" },
   { name: "Blog", path: "/blog" },
   { name: "Partners", path: "/partners" },
 ];
 const supportLinks=[
-  { name: "Acessbility", path: "/Accessibility" },
+  { name: "Acessbility", path: "/access-ability" },
   { name: "ContactUs", path: "/Contactus" },
-  { name: "Help", path: "/Help" },
-  { name: "ExpiryDate", path: "/NotificationSettings" },
+  { name: "Help Center", path: "/Help-center" },
+  { name: "FAQ's", path: "/Faqs" },
+  { name: "LIve Chat", path: "/live-chat" },
   
 ];
 const TermsPolicyLink=[

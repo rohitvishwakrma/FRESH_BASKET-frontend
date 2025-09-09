@@ -152,8 +152,8 @@ const QuickSeasonalRecipes = () => {
   </div>
 )}
 
-            </div>
-          ))}
+ </div>
+))}
           {filteredRecipes.length === 0 && (
             <p className="col-span-2 text-center text-gray-500 text-lg mt-4">
               No recipes found.

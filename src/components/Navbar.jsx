@@ -55,7 +55,7 @@ const Navbar = () => {
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
             type="text"
             placeholder="Search products"
-            value={searchQuery}
+            value={searchQuery || ""}
           />
 
           {/* Search Icon - Corrected SVG attributes */}
@@ -244,6 +244,28 @@ const Navbar = () => {
             Login
           </button>
         )}
+
+        {/* Admin Partner Approvals Link - Shown only to users with admin role */}
+        {user?.role === "admin" && (
+          <div className="w-full py-2">
+            <a
+              href="/admin/partners"
+              className="block w-full py-2 text-center text-green-600 font-semibold hover:bg-green-50 transition"
+            >
+              Admin Partner Approvals
+            </a>
+          </div>
+        )}
+
+        {/* Partner Login Link - Shown to all users */}
+        <div className="w-full py-2">
+          <a
+            href="/partner-login"
+            className="block w-full py-2 text-center text-green-600 font-semibold hover:bg-green-50 transition"
+          >
+            Partner Login
+          </a>
+        </div>
       </div>
     </nav>
   );
