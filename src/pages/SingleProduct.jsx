@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext, useAppContext } from "../context/appContext";
+import ReviewForm from "../components/ReviewForm";
+import ProductReviews from "../components/ProductReviews";
+import RefundForm from "../components/RefundForm";
+import CancellationForm from "../components/CancellationForm";
+import { AppContext, useAppContext } from "../context/AppContext";
 import { assets, dummyOrders } from "../assets/assets";
 import toast from "react-hot-toast";
 
@@ -40,10 +44,10 @@ const Orders = () => {
               alt="boxIcon"
             />
             <>
-              {order.items.map((item, index) => (
-                <div key={index} className="flex flex-col justify-center">
+              {order.items.map((item, idx) => (
+                <div key={idx} className="flex flex-col justify-center">
                   <p className="font-medium">
-                    {item.product.name}{" "}
+                    {item.product.name} {" "}
                     <span
                       className={`text-indigo-500 ${
                         item.quantity < 2 && "hidden"
@@ -52,21 +56,15 @@ const Orders = () => {
                       x {item.quantity}
                     </span>
                   </p>
+                  {/* Review Form and Reviews for each product */}
+                  <ReviewForm productId={item.product._id} userId={order.userId} onReviewAdded={() => {}} />
+                  <ProductReviews productId={item.product._id} />
                 </div>
               ))}
             </>
           </div>
 
           <div className="text-sm">
-            {/* <p className="font-medium mb-1">
-              {order.address.firstName},
-              {order.address.lastName}
-            </p>
-            <p>
-              {order.address.street}, {order.address.city},{" "}
-              {order.address.state},{order.address.zipcode},{" "}
-              {order.address.country}
-            </p> */}
               <p className="font-medium mb-1">
                   {order.address?.firstName || "Unknown"},
                   {order.address?.lastName || ""}
@@ -86,6 +84,9 @@ const Orders = () => {
             <p>Method: {order.paymentType}</p>
             <p>Date: {order.orderDate}</p>
             <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
+            {/* Refund and Cancellation Forms */}
+            <RefundForm orderId={order._id} userId={order.userId} onRefundRequested={() => {}} />
+            <CancellationForm orderId={order._id} userId={order.userId} onCancellationRequested={() => {}} />
           </div>
         </div>
       ))}

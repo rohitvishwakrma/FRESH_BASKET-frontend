@@ -47,8 +47,9 @@ const SellerLogin = () => {
               value={email}
               placeholder="type here"
               className="border border-gray-200 rounded w-full p-2 mt-1 outline-indigo-500"
-              type="email"
-              required
+                type="email"
+                required
+                autoComplete="username"
             />
           </div>
           <div className="w-full ">
