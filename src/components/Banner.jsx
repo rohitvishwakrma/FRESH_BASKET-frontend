@@ -21,7 +21,7 @@ const Banner = () => {
         <div className="flex items-center mt-8 font-semibold gap-6 ">
           <Link
             to={"/products"}
-            className="flex group items-center gap-2 px-8 rounded-lg text-white py-3 bg-green-600 hover:bg-green-700 shadow-lg transition-all text-lg"
+            className="flex group items-center gap-2 px-8 rounded-lg text-white py-3 bg-primary hover:bg-primary-700 shadow-lg transition-all text-lg"
           >
             Shop Now
             <img
@@ -32,7 +32,7 @@ const Banner = () => {
           </Link>
           <Link
             to={"/products"}
-            className="hidden md:flex group items-center gap-2 px-8 rounded-lg text-white py-3 bg-green-600 hover:bg-green-700 shadow-lg transition-all text-lg"
+            className="hidden md:flex group items-center gap-2 px-8 rounded-lg text-white py-3 bg-primary hover:bg-primary-700 shadow-lg transition-all text-lg"
           >
             Explore Deals
             <img

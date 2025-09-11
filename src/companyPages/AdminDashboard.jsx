@@ -74,12 +74,20 @@ export default function AdminDashboard() {
                       "-"
                     )}
                   </td>
-                  <td className="p-2">
+                  <td className="p-2 flex gap-2">
                     <button
-                      onClick={() => { setSelectedPartner(partner); setShowModal(true); }}
-                      className="bg-green-600 text-white px-3 py-1 rounded mr-2"
+                      onClick={() => handleAction(partner._id, "approved")}
+                      className="bg-green-600 text-white px-3 py-1 rounded"
                     >
-                      Approve/Reject
+                      Approve
+                    <button
+                      className="bg-green-500 text-white px-2 py-1 rounded mr-2"
+                      onClick={() => {
+                        handleApprove(partner._id);
+                      }}
+                    >
+                      Auto Approve
+                    </button>
                     </button>
                   </td>
                 </tr>

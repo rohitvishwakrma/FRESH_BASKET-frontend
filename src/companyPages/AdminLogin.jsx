@@ -54,7 +54,7 @@ export default function AdminLogin() {
         <div className="mb-6">
           <label className="block text-gray-700 mb-2">Password</label>
           <input
-            type="password"
+            type="password" autoComplete="current-password"
             name="password"
             value={form.password}
             onChange={handleChange}

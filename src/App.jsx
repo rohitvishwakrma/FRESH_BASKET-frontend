@@ -7,7 +7,7 @@ import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
-import { useAppContext } from "./context/appContext";
+import { useAppContext } from "./context/AppContext";
 import Auth from "./modals/Auth";
 import ProductCategory from "./pages/ProductCategory";
 import Address from "./pages/Address";
@@ -18,29 +18,32 @@ import AddProduct from "./pages/seller/AddProduct";
 import ProductList from "./pages/seller/ProductList";
 import Orders from "./pages/seller/Orders";
 
-
-import About from "./companyPages/About";
-import Career from "./companyPages/CareerPage";
-import Blog from "./companyPages/Blog";
-import Partners from "./companyPages/Partners";
-import Article from "./companyPages/Article"; 
-
+/* support import */
 import ContactUs from "./supportPages/ContactUs";
 import  CustomerHelp  from "./supportPages/HelpCenter";
 import FAQsPage from "./supportPages/Faqs";
 import Accessibility from "./supportPages/Acessbilty";
 import LiveChat from "./supportPages/LiveChat";
 
+/* company import */
+import About from "./companyPages/About";
+import Career from "./companyPages/CareerPage";
+import Blog from "./companyPages/Blog";
+import Partners from "./companyPages/Partners";
+import Article from "./companyPages/Article"; 
+/* blog part -company*/
 import QuickSeasonalRecipes from "./companyPages/QuickSeasonalRecipes";
 import StoreVegetables from "./companyPages/StoreVegetables";
 import ApplyForm from "./companyPages/ApplyForm";
 import CareerPage from "./companyPages/CareerPage";
 import PartnerApply from "./companyPages/PartnerApply";
 import PartnerAdminDashboard from "./companyPages/PartnerAdminDashboard";
-
+import PartnerApproval from "./companyPages/PartnerApproval";
+/* partner and admin part-company */
 import PartnerLogin from "./companyPages/PartnerLogin";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminRegister from "./pages/AdminRegister";
 import ErrorBoundary from "./utils/ErrorBoundary";
 
 
@@ -80,36 +83,45 @@ const App = () => {
             <Route path="/cart" element={<Cart/>} />
             <Route path="/add-address" element={<Address />} />
             <Route path="/my-orders" element={<MyOrders />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/Careers" element={<Career />} />
-            <Route path="/Blog" element={<Blog />} />
-            <Route path="/Partners" element={<Partners />} />
-            <Route path="/Article" element={<Article />} />   
             <Route path="/Terms&Policy" element={<TermsPolicy />} />
 
-
+             {/* support routes */}
+            <Route path="/access-ability" element={<Accessibility/>} />
             <Route path="/Contactus" element={<ContactUs />} />
             <Route path="/Help-center" element={<CustomerHelp/>} />
             <Route path="/Faqs" element={<FAQsPage/>} />
-            <Route path="/access-ability" element={<Accessibility/>} />
             <Route path="/live-chat" element={<LiveChat/>} />
-            
 
-            <Route path="/quick-seasonal-recipes" element={<QuickSeasonalRecipes />} />
-            <Route path="/store-vegetables" element={<StoreVegetables />} />
+
+
+            {/*Company routes  */}
+            <Route path="/About" element={<About />} />
+            <Route path="/Careers" element={<Career />} />
+            <Route path="/seller/login" element={<PartnerLogin />} />
             <Route path="/career" element={<CareerPage />} />
+            <Route path="/Article" element={<Article />} />   
+            <Route path="/Blog" element={<Blog />} />
+            <Route path="/Partners" element={<Partners />} />
+            <Route path="/partner-login" element={<PartnerLogin />} />
             <Route path="/apply" element={<ApplyForm />} />
             <Route path="/partner-apply" element={<PartnerApply />} />
+            <Route path="/quick-seasonal-recipes" element={<QuickSeasonalRecipes />} />
+            <Route path="/store-vegetables" element={<StoreVegetables />} />
             <Route path="/admin/partners" element={<PartnerAdminDashboard />} />
             <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/admin-register" element={<AdminRegister />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/partner-login" element={<PartnerLogin />} />
+            <Route path="/admin/partner-approval" element={<PartnerApproval />} />
+
+
             {/* Seller routes */}
             <Route path="/seller" element={isSeller ? <SellerLayout /> : <SellerLogin />}>
               <Route index element={isSeller ? <AddProduct /> : null} />
               <Route path="product-list" element={isSeller ? <ProductList /> : null} />
               <Route path="orders" element={isSeller ? <Orders /> : null} />
             </Route>
+
+
           </Routes>
         </div>
         {isSellerPath ? null : <Footer />}

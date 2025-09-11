@@ -58,7 +58,7 @@ const SellerLogin = () => {
               value={password}
               placeholder="type here"
               className="border border-gray-200 rounded w-full p-2 mt-1 outline-indigo-500"
-              type="password"
+              type="password" autoComplete="current-password"
               required
             />
           </div>

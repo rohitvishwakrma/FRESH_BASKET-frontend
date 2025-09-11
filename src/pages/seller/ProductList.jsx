@@ -24,7 +24,8 @@ const ProductList = () => {
 
   const toggleStock = async (id, inStock) => {
     try {
-      const { data } = await axios.post("/api/product/stock", { id, inStock });
+      const stock = inStock ? 1 : 0;
+      const { data } = await axios.patch("/api/product/stock", { productId: id, stock });
       if (data.success) {
         fetchProducts();
         toast.success(data.message);
@@ -32,7 +33,7 @@ const ProductList = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.success(error.message);
+      toast.error(error.message);
     }
   };
 

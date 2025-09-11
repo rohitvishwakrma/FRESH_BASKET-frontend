@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppContext } from "../context/appContext";
+import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import toast from "react-hot-toast";
 
@@ -46,8 +46,8 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className="hidden sm:flex items-center gap-8">
-        <Link to="/" className="hover:text-indigo-600 transition">Home</Link>
-        <Link to="/products" className="hover:text-indigo-600 transition">All Products</Link>
+        <Link to="/" className="text-gray-700 hover:text-primary transition">Home</Link>
+        <Link to="/products" className="text-gray-700  hover:text-primary transition">All Products</Link>
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full hover:border-indigo-400 transition">
           <input

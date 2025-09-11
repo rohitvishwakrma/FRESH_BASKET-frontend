@@ -2,24 +2,46 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function PartnerApproval() {
-  const [partners, setPartners] = useState([]);
+  const [pendingPartners, setPendingPartners] = useState([]);
+  const [approvedPartners, setApprovedPartners] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Fetch pending applications
-  const fetchPendingPartners = async () => {
+  // Fetch pending and approved applications
+  const fetchPartners = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/partners/pending");
-      const data = await res.json();
-      setPartners(data);
+      const token = localStorage.getItem("adminToken");
+      const pendingRes = await fetch("http://localhost:5000/api/partners/pending", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      let pendingData = await pendingRes.json();
+      if (!pendingRes.ok) {
+        setPendingPartners([]);
+        setError(pendingData.message || "Unauthorized or server error fetching pending partners.");
+      } else {
+        setPendingPartners(Array.isArray(pendingData) ? pendingData : []);
+      }
+      const approvedRes = await fetch("http://localhost:5000/api/partners/approved", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      let approvedData = await approvedRes.json();
+      if (!approvedRes.ok) {
+        setApprovedPartners([]);
+        setError(approvedData.message || "Unauthorized or server error fetching approved partners.");
+      } else {
+        setApprovedPartners(Array.isArray(approvedData) ? approvedData : []);
+      }
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching partners:", error);
+      setError("Network error fetching partners.");
+      setPendingPartners([]);
+      setApprovedPartners([]);
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPendingPartners();
+    fetchPartners();
   }, []);
 
   // Approve or Reject partner
@@ -33,7 +55,7 @@ export default function PartnerApproval() {
 
       if (res.ok) {
         alert(`Partner ${action} successfully!`);
-        fetchPendingPartners(); // Refresh list
+        fetchPartners(); // Refresh lists
       } else {
         alert("Failed to update partner status!");
       }
@@ -43,7 +65,8 @@ export default function PartnerApproval() {
     }
   };
 
-  if (loading) return <p className="text-center mt-20">Loading pending partners...</p>;
+  if (loading) return <p className="text-center mt-20">Loading partners...</p>;
+  if (error) return <p className="text-center mt-20 text-red-600">{error}</p>;
 
   return (
     <motion.div
@@ -56,11 +79,11 @@ export default function PartnerApproval() {
         Pending Partner Applications
       </h1>
 
-      {partners.length === 0 ? (
+      {pendingPartners.length === 0 ? (
         <p className="text-gray-700 text-center">No pending applications!</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {partners.map((partner) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {pendingPartners.map((partner) => (
             <div
               key={partner._id}
               className="bg-white shadow-md rounded-lg p-6 flex flex-col"
@@ -108,6 +131,44 @@ export default function PartnerApproval() {
             </div>
           ))}
         </div>
+      )}
+
+      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+        Approved Partners
+      </h1>
+      {approvedPartners.length === 0 ? (
+        <p className="text-gray-700 text-center">No approved partners yet.</p>
+      ) : (
+        <table className="w-full border mb-10">
+          <thead>
+            <tr className="bg-green-100">
+              <th className="p-2">Business Name</th>
+              <th className="p-2">Contact Person</th>
+              <th className="p-2">Email</th>
+              <th className="p-2">Phone</th>
+              <th className="p-2">Message</th>
+              <th className="p-2">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {approvedPartners.map((partner) => (
+              <tr key={partner._id} className="border-t">
+                <td className="p-2">{partner.businessName}</td>
+                <td className="p-2">{partner.contactPerson}</td>
+                <td className="p-2">{partner.email}</td>
+                <td className="p-2">{partner.phone}</td>
+                <td className="p-2">{partner.message}</td>
+                <td className="p-2">
+                  {partner.document ? (
+                    <a href={`http://localhost:5000/uploads/partners/${partner.document}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>
+                  ) : (
+                    "-"
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </motion.div>
   );

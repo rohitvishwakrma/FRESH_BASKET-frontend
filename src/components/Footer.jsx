@@ -15,7 +15,7 @@ const supportLinks=[
   { name: "ContactUs", path: "/Contactus" },
   { name: "Help Center", path: "/Help-center" },
   { name: "FAQ's", path: "/Faqs" },
-  { name: "LIve Chat", path: "/live-chat" },
+  // { name: "LIve Chat", path: "/live-chat" },
   
 ];
 const TermsPolicyLink=[
@@ -25,7 +25,7 @@ const TermsPolicyLink=[
 
 const Footer = () => {
 return (
-  <footer className="object-cover bg-white flex justify-center border-e-0 border-gray-200">
+  <footer className="mt-16 object-cover bg-white flex justify-center border-e-0 border-gray-200">
     <div className=" bg-gradient-to-tr from-indigo-400 via-purple-500/9 to-pink-700 p-1 rounded-3xl shadow-2xl px-10 transition-all duration-500  ">
       <div className="bg-white/55 dark:bg-gray-100 rounded-3xl   p-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-gray-900">
@@ -72,7 +72,7 @@ return (
                     {name }</a>  
                 </li>))}
             </ul>
-             <p className="mt-4 text-sm px-7 mb-2 dark:text-gray-900 ">
+             <p className="mt-4.5 text-sm px-7 mb-2 dark:text-gray-900 ">
                  <i className="ri-account-circle-line "> Service running. Your choice always.
             </i> </p>
           </div>
@@ -86,7 +86,7 @@ return (
                     {name}</a>  
                 </li>))}
             </ul>
-             <p className="mt-12 text-sm px-7  text-gray-500 text-wrap-reverse dark:text-gray-900 ">
+             <p className="mt-13 text-sm px-7  text-gray-500 text-wrap-reverse dark:text-gray-900 ">
                  <i className="ri-account-circle-line "> Your issue, our priority.Contact freely.
             </i> </p>
           </div>
@@ -136,6 +136,11 @@ return (
         <hr className="border-gray-500 dark:border-gray-300  mt-10" />
         <div className="flex flex-col md:flex-row gap-2 items-center justify-between py-3 text-sm  text-gray-900 d">
           <p> <i className="ri-focus-2-fill"></i>{new Date().getFullYear(2025)}  Fresh Basket. All rights reserved.</p>
+         
+
+          <a href="https://github.com/rohitvishwakrma" target="_blank" rel="noopener noreferrer" className="hover:text-gray-700 transition-colors">
+            <i className="ri-github-fill">Developed by Rohit Vishwakarma</i>
+          </a>
 
         {/* base parts  */}
           <ul className="flex items-center gap-5">
