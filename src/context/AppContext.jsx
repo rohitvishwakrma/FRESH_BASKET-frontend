@@ -5,6 +5,11 @@ import toast from "react-hot-toast";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+// Set Authorization header if token exists
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+}
 export const AppContext = createContext(null);
 
 export const AppContextProvider = ({ children }) => {
@@ -32,6 +37,9 @@ export const AppContextProvider = ({ children }) => {
 
   // fetch user auth status ,user Data and cart items
   const fetchUser = async () => {
+    // Only call if token exists
+    const token = localStorage.getItem('token');
+    if (!token) return;
     try {
       const { data } = await axios.get("/api/user/is-auth");
       if (data.success) {

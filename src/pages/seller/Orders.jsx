@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext, useAppContext } from "../../context/AppContext";
 import { assets, dummyOrders } from "../../assets/assets";
 import toast from "react-hot-toast";
-
 const Orders = () => {
   const boxIcon =
     "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
@@ -69,7 +68,7 @@ const Orders = () => {
           </div>
 
           <p className="font-medium text-base my-auto text-black/70">
-            ${order.amount}
+            <i className="remi-rupay-fill"></i>{order.amount}
           </p>
 
           <div className="flex flex-col text-sm">
