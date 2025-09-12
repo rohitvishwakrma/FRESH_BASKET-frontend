@@ -1,96 +1,109 @@
-import { useContext, useEffect, useState } from "react";
-import ReviewForm from "../components/ReviewForm";
-import ProductReviews from "../components/ProductReviews";
-import RefundForm from "../components/RefundForm";
-import CancellationForm from "../components/CancellationForm";
-import { AppContext, useAppContext } from "../context/AppContext";
-import { assets, dummyOrders } from "../assets/assets";
+import React, { useState, useEffect } from "react";
+import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
-const Orders = () => {
-  const boxIcon =
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
 
-  const [orders, setOrders] = useState([]);
-  const { axios } = useContext(AppContext);
-  const fetchOrders = async () => {
-    try {
-      const { data } = await axios.get("/api/order/seller");
-      if (data.success) {
-        setOrders(data.orders);
-      } else {
-        toast.error(data.message);
+const SingleProduct = () => {
+  // State for product details and quantity
+  const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
+  // App context: cart management, navigation, axios instance
+  const { setCartItems, cartItems, navigate, axios } = useAppContext();
+
+  // Get product ID or name from route params
+  const { id } = useParams(); // id can be either product ID or name
+
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        let data;
+        // If id is a valid MongoDB ObjectId, fetch by ID
+        if (/^[a-fA-F0-9]{24}$/.test(id)) {
+          ({ data } = await axios.get(`/api/product/${id}`));
+        } else {
+          // Otherwise, fetch by name
+          ({ data } = await axios.get(`/api/product/name/${encodeURIComponent(id)}`));
+        }
+        if (data.success && data.product) {
+          setProduct(data.product);
+        } else {
+          toast.error(data.message || "Product not found");
+        }
+      } catch (error) {
+        // If error is 404, show a specific message
+        if (error.response && error.response.status === 404) {
+          toast.error("Product not found. Please check the ID or name.");
+        } else {
+          console.error("Product fetch error:", error);
+          toast.error(error.message || "Failed to fetch product");
+        }
       }
-    } catch (error) {
-      toast.error(error.message);
+    }
+    fetchProduct();
+  }, [id, axios]);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    setCartItems({
+      ...cartItems,
+      [product._id]: quantity,
+    });
+    toast.success(`${quantity} x ${product.name} added to cart!`);
+    if (typeof navigate === "function") {
+      navigate("/cart");
     }
   };
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg text-gray-500">Loading product...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="md:p-10 p-4 space-y-4">
-      <h2 className="text-lg font-medium">Orders List</h2>
-      {orders.map((order, index) => (
-        <div
-          key={index}
-          className="flex flex-col md:grid md:grid-cols-[2fr_1fr_1fr_1fr] md:items-center gap-5 p-5 max-w-4xl rounded-md border border-gray-300 text-gray-800"
-        >
-          <div className="flex gap-5">
-            <img
-              className="w-12 h-12 object-cover opacity-60"
-              src={`http://localhost:5000/images/${order.items[0].product.image[0]}`}
-              alt="boxIcon"
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl w-full bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row gap-8">
+        <div className="flex-shrink-0 flex items-center justify-center">
+          <img
+            src={Array.isArray(product.image) && product.image[0] ? `http://localhost:5000/images/${product.image[0]}` : "https://via.placeholder.com/256?text=No+Image"}
+            alt={product.name}
+            className="w-64 h-64 object-cover rounded-lg border border-gray-50 bg-gray-50"
+          />
+        </div>
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-green-700 mb-2">{product.name}</h1>
+            <p className="text-sm text-gray-500 mb-2">Category: {product.category}</p>
+            <p className="text-lg font-semibold text-indigo-600 mb-4">₹{product.offerPrice}</p>
+            <p className="text-gray-700 mb-4">{product.description}</p>
+            <p className="text-gray-500 mb-2">Weight: {product.weight}</p>
+            <p className="text-gray-500 mb-2">In Stock: {product.stock}</p>
+          </div>
+          <div className="flex items-center gap-4 mt-6">
+            <label className="font-medium">Qty:</label>
+            <input
+              type="number"
+              min={1}
+              max={product.stock}
+              value={quantity}
+              onChange={e => setQuantity(Math.max(1, Math.min(product.stock, Number(e.target.value))))}
+              className="border rounded px-3 py-2 w-20 text-center"
             />
-            <>
-              {order.items.map((item, idx) => (
-                <div key={idx} className="flex flex-col justify-center">
-                  <p className="font-medium">
-                    {item.product.name} {" "}
-                    <span
-                      className={`text-indigo-500 ${
-                        item.quantity < 2 && "hidden"
-                      }`}
-                    >
-                      x {item.quantity}
-                    </span>
-                  </p>
-                  {/* Review Form and Reviews for each product */}
-                  <ReviewForm productId={item.product._id} userId={order.userId} onReviewAdded={() => {}} />
-                  <ProductReviews productId={item.product._id} />
-                </div>
-              ))}
-            </>
-          </div>
-
-          <div className="text-sm">
-              <p className="font-medium mb-1">
-                  {order.address?.firstName || "Unknown"},
-                  {order.address?.lastName || ""}
-                </p>
-                <p>
-                  {order.address?.street || ""}, {order.address?.city || ""},{" "}
-                  {order.address?.state || ""}, {order.address?.zipcode || ""}, {" "}
-                  {order.address?.country || ""}
-                </p>
-          </div>
-
-          <p className="font-medium text-base my-auto text-black/70">
-            ${order.amount}
-          </p>
-
-          <div className="flex flex-col text-sm">
-            <p>Method: {order.paymentType}</p>
-            <p>Date: {order.orderDate}</p>
-            <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
-            {/* Refund and Cancellation Forms */}
-            <RefundForm orderId={order._id} userId={order.userId} onRefundRequested={() => {}} />
-            <CancellationForm orderId={order._id} userId={order.userId} onCancellationRequested={() => {}} />
+            <button
+              onClick={handleAddToCart}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };
-export default Orders;
+
+export default SingleProduct;

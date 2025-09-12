@@ -370,7 +370,12 @@ const Cart = () => {
         if (data.success) {
           toast.success(data.message);
           setCartItems({});
-          navigate("/my-orders");
+          // Redirect to single order page after payment
+          if (data.order && data.order._id) {
+            navigate(`/order/${data.order._id}`);
+          } else {
+            navigate("/my-orders");
+          }
         } else {
           toast.error(data.message);
         }

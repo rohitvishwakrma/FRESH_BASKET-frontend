@@ -67,7 +67,7 @@ const QuickSeasonalRecipes = () => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12 space-y-12">
+    <div className="max-w-6xl mx-auto px-6  py-12 bg-gray-50 space-y-12">
       {/* Header */}
       <header className="text-center space-y-3">
         <h1 className="text-4xl md:text-5xl font-extrabold text-green-800">
@@ -108,9 +108,9 @@ const QuickSeasonalRecipes = () => {
 
               {/* Video */}
                 {recipe.video && (
-  <div className="mt-4 relative">
-    {activeVideo === idx ? (
-      <div className="relative w-full h-60 md:h-64 rounded-2xl shadow-lg overflow-hidden">
+        <div className="mt-4 relative">
+       {activeVideo === idx ? (
+       <div className="relative w-full h-60 md:h-64 rounded-2xl shadow-lg overflow-hidden">
         {/* Loader while iframe is loading */}
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 z-10" id={`loader-${idx}`}>
           <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>

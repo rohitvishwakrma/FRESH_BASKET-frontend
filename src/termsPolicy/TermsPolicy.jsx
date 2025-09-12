@@ -5,7 +5,7 @@ const TermsPolicy = () => {
     <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-green-600 text-gray-50 mb-2">
+          <h1 className="text-3xl font-bold  text-primary mb-2">
             Terms & Policies
           </h1>
           <div className="w-20 h-1 bg-green-500 mx-auto"></div>

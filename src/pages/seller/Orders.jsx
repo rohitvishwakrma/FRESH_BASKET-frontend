@@ -1,13 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext, useAppContext } from "../../context/AppContext";
-import { assets, dummyOrders } from "../../assets/assets";
+
+// import RefundForm from "../../components/RefundForm";
 import toast from "react-hot-toast";
+
 const Orders = () => {
   const boxIcon =
     "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
 
   const [orders, setOrders] = useState([]);
   const { axios } = useContext(AppContext);
+  // Refund/cancel order features removed
+
   const fetchOrders = async () => {
     try {
       const { data } = await axios.get("/api/order/seller");
@@ -42,7 +46,7 @@ const Orders = () => {
               {order.items.map((item, index) => (
                 <div key={index} className="flex flex-col justify-center">
                   <p className="font-medium">
-                    {item.product.name}{" "}
+                    {item.product.name} {" "}
                     <span
                       className={`text-indigo-500 ${
                         item.quantity < 2 && "hidden"
@@ -68,16 +72,19 @@ const Orders = () => {
           </div>
 
           <p className="font-medium text-base my-auto text-black/70">
-            <i className="remi-rupay-fill"></i>{order.amount}
+            ₹{order.amount}
           </p>
 
           <div className="flex flex-col text-sm">
             <p>Method: {order.paymentType}</p>
             <p>Date: {order.orderDate}</p>
             <p>Payment: {order.isPaid ? "Paid" : "Pending"}</p>
+            {/* Refund/cancel order features removed */}
           </div>
         </div>
       ))}
+
+  {/* Refund/cancel order features removed */}
     </div>
   );
 };
