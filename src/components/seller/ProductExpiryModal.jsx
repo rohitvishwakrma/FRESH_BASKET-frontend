@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../context/appContext";
+import { useAppContext } from "../../context/AppContext";
 
 const ProductExpiryModal = ({ products, onConfirm, onClose }) => {
   const [selected, setSelected] = useState([]);
