@@ -17,7 +17,7 @@ const Products = () => {
     }
   }, [products, searchQuery]);
   return (
-    <div className="mt-16">
+    <div className="mt-16 bg-gray-50 py-10 px-2 md:px-8 rounded-xl shadow">
       <h1 className="text-3xl lg:text-4xl font-medium">All Products</h1>
       <div className="my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 items-center justify-center">
         {filteredProducts

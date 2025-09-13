@@ -72,7 +72,7 @@ const Orders = () => {
           </div>
 
           <p className="font-medium text-base my-auto text-black/70">
-            ₹{order.amount}
+            <i className="ri-money-rupee-circle-fill text-indigo-600"></i>{order.amount}
           </p>
 
           <div className="flex flex-col text-sm">

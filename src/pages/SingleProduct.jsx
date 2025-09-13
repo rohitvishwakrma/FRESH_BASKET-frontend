@@ -78,7 +78,12 @@ const SingleProduct = () => {
           <div>
             <h1 className="text-3xl font-bold text-green-700 mb-2">{product.name}</h1>
             <p className="text-sm text-gray-500 mb-2">Category: {product.category}</p>
-            <p className="text-lg font-semibold text-indigo-600 mb-4">₹{product.offerPrice}</p>
+            {/* <p className="text-lg font-semibold text-indigo-600 mb-4">₹{product.offerPrice}</p> */}
+            <p className="text-lg font-semibold text-indigo-600 mb-4">
+             <i className="ri-money-rupee-circle-fill mr-1"></i>
+              {product.offerPrice}
+            </p>
+
             <p className="text-gray-700 mb-4">{product.description}</p>
             <p className="text-gray-500 mb-2">Weight: {product.weight}</p>
             <p className="text-gray-500 mb-2">In Stock: {product.stock}</p>

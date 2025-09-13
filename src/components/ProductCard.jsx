@@ -56,9 +56,9 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center justify-between mt-auto pt-1">
             {/* PRICE */}
             <p className="text-indigo-600 font-semibold text-xs sm:text-sm md:text-base flex items-center gap-1">
-              ₹{product.offerPrice}
+              <i className="ri-money-rupee-circle-fill text-indigo-600"></i>{product.offerPrice}
               <span className="line-through text-gray-400 text-[9px] sm:text-xs">
-                ₹{product.price}
+                <i className="ri-money-rupee-circle-fill text-indigo-600"></i>{product.price}
               </span>
             </p>
 

@@ -16,8 +16,8 @@ const Banner = () => {
       />
       <div className="absolute inset-0 flex flex-col items-center md:items-start justify-end md:justify-center pb-24 md:pb-0 md:pl-18 lg:pl-24">
         <h1 className="text-3xl md:text-5xl font-bold text-green-700 text-center md:text-left max-w-2xl leading-tight lg:leading-15 drop-shadow">
-          Freshness You Can Trust, Savings You will Love!
-        </h1>
+              “Your favorites, always ready” , Savings You will Love!
+         </h1>
         <div className="flex items-center mt-8 font-semibold gap-6 ">
           <Link
             to={"/products"}
@@ -36,7 +36,8 @@ const Banner = () => {
           >
             Explore Deals
             <img
-              src={assets.white_arrow_icon}
+              // src={assets.white_arrow_icon}
+               src={assets.white_arrow_icon}
               alt="arrow"
               className="md:hidden transition group-focus:translate-x-1"
             />

@@ -151,7 +151,7 @@ const MyOrders = () => {
                         {order.status || "Delivered"}
                       </span>
                       <p className="mt-1 text-sm font-medium text-gray-900">
-                        Total: ₹{order.amount}
+                        Total: <i className="ri-money-rupee-circle-fill text-indigo-600"></i>{order.amount}
                       </p>
                     </div>
                   </div>
@@ -213,11 +213,11 @@ const MyOrders = () => {
                                   {item.product.category}
                                 </div>
                                 <div className="text-sm text-gray-500 mt-1">
-                                  Quantity: {item.quantity} • ₹
+                                  Quantity: {item.quantity} • <i className="ri-money-rupee-circle-fill text-indigo-600"></i>
                                   {item.product.offerPrice} each
                                 </div>
                                 <div className="text-sm font-medium text-gray-900 mt-1">
-                                  ₹{item.product.offerPrice * item.quantity}
+                                  <i className="ri-money-rupee-circle-fill text-indigo-600"></i>{item.product.offerPrice * item.quantity}
                                 </div>
                               </div>
                             </div>

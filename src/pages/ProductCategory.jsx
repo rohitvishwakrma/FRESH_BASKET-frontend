@@ -13,10 +13,10 @@ const ProductCategory = () => {
     (product) => product.category.toLowerCase() === category
   );
   return (
-    <div className="mt-16">
+    <div className="mt-10 w-full bg-white border border-gray-100 px-4 py-10 rounded-xl shadow">
       {searchCategory && (
         <div className="flex flex-col items-end w-max">
-          <h1 className="text-3xl md:text-4xl font-medium">
+          <h1 className="text-3xl md:text-4xl font-medium text-green-600 " >
             {searchCategory.text.toUpperCase()}
           </h1>
         </div>
@@ -30,8 +30,8 @@ const ProductCategory = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <h1 className="text-3xl md:text-4xl font-medium">
+        <div className="mt-5 bg-gray-50 border border-gray-100 px-4 rounded-sm shadow">
+          <h1 className="text-3xl md:text-4xl font-medium text-red-600 text-centeq">
             No products found
           </h1>
         </div>
