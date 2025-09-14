@@ -34,12 +34,11 @@ const BestSeller = () => {
       <div className="my-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-6 items-center justify-center">
         {products
           .filter((product) => product.inStock)
-          .slice(0, 20) // keep your limit
-          .map((product, index) => (
-            <div className="w-full flex object-cover items-center  justify-center transition-all">
+          .slice(0, 20)
+          .map((product) => (
+            <div className="w-full flex object-cover items-center  justify-center transition-all" key={product._id}>
               <div 
-              key={index}
-              className="w-full flex object-cover items-center  justify-center bg-white shadow-md hover:shadow-lg transition-all border border-gray-100 rounded-xl">
+                className="w-full flex object-cover items-center  justify-center bg-white shadow-md hover:shadow-lg transition-all border border-gray-100 rounded-xl">
                 {/* ProductCard renders inside, but image stays contained */}
                 <ProductCard product={product} />
               </div>
