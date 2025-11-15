@@ -24,7 +24,11 @@ const Auth = () => {
       } else {
         toast.error(data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      // show server validation errors to the user
+      const message = error?.response?.data?.message || error.message || "Something went wrong";
+      toast.error(message);
+    }
   };
   return (
     <div

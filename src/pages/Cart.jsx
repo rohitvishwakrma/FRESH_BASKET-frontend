@@ -23,6 +23,7 @@ const Cart = () => {
   const [address, setAddress] = useState([]);
   const [showAddress, setShowAddress] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [pendingOrderAfterAddress, setPendingOrderAfterAddress] = useState(false);
   const [paymentOption, setPaymentOption] = useState("COD");
 
   useEffect(() => {
@@ -119,7 +120,36 @@ const razorpayPayment = async () => {
         const verifyRes = await axios.post("/api/payment/verify", response);
         if (verifyRes.data.success) {
           toast.success("Payment Successful 🎉");
-          placeOrder(); // save order in DB
+          // If address is selected, place online order immediately.
+          if (selectedAddress) {
+            try {
+              const { data: orderRes } = await axios.post('/api/order/online', {
+                items: cartArray.map((item) => ({ product: item._id, quantity: item.quantity, expiryDate: item.expiryDate })),
+                address: selectedAddress._id,
+                paymentDetails: response,
+              });
+              if (orderRes.success) {
+                toast.success(orderRes.message);
+                setCartItems({});
+                if (orderRes.order && orderRes.order._id) {
+                  navigate(`/order/${orderRes.order._id}`);
+                } else {
+                  navigate('/my-orders');
+                }
+              } else {
+                toast.error(orderRes.message);
+              }
+            } catch (err) {
+              toast.error(err.message || 'Order placement failed');
+            }
+          } else {
+            // No address selected: prompt user to select one. After selection, order will be placed.
+            setPendingOrderAfterAddress(true);
+            setShowAddress(true);
+            toast.custom(() => (
+              <div className="bg-white p-3 rounded shadow">Payment received — please select delivery address to complete order.</div>
+            ));
+          }
         } else {
           toast.error("Payment verification failed..");
         }
@@ -231,9 +261,29 @@ const razorpayPayment = async () => {
               {address.map((address, index) => (
                 <p
                   key={index}
-                  onClick={() => {
+                  onClick={async () => {
                     setSelectedAddress(address);
                     setShowAddress(false);
+                    // If we are waiting for address after payment, place online order now
+                    if (pendingOrderAfterAddress) {
+                      setPendingOrderAfterAddress(false);
+                      try {
+                        const { data } = await axios.post('/api/order/online', {
+                          items: cartArray.map((item) => ({ product: item._id, quantity: item.quantity, expiryDate: item.expiryDate })),
+                          address: address._id,
+                          paymentDetails: {},
+                        });
+                        if (data.success) {
+                          toast.success(data.message);
+                          setCartItems({});
+                          navigate('/my-orders');
+                        } else {
+                          toast.error(data.message);
+                        }
+                      } catch (err) {
+                        toast.error(err.message || 'Order placement failed');
+                      }
+                    }
                   }}
                   className="text-gray-700 p-2 hover:bg-gray-100 cursor-pointer"
                 >
