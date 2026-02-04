@@ -1,0 +1,21 @@
+{
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "command": "npm install && npm run build",
+    "watchPaths": [
+      "src/**/*",
+      "public/**/*",
+      "package.json",
+      "vite.config.js",
+      ".env"
+    ]
+  },
+  "deploy": {
+    "static": {
+      "publicDir": "dist",
+      "healthcheckPath": "/"
+    }
+  }
+}
