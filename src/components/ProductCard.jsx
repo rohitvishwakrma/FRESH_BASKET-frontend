@@ -9,7 +9,8 @@ const ProductCard = ({ product }) => {
     product && (
       <div
         onClick={() => {
-          navigate(`/product/${product.category.toLowerCase()}/${product?._id}`);
+          const category = product.category ? product.category.toLowerCase() : "unknown";
+          navigate(`/product/${category}/${product?._id}`);
           scrollTo(0, 0);
         }}
         className="flex flex-col border border-gray-200 rounded-lg shadow-sm p-2 

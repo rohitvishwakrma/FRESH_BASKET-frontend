@@ -194,15 +194,15 @@ const MyOrders = () => {
                             <div className="flex items-start gap-4 flex-1">
                               <img
                                 src={
-                                  typeof item.product.image === "string" &&
-                                  item.product.image.startsWith("http")
-                                    ? item.product.image
-                                    : Array.isArray(item.product.image) &&
-                                      item.product.image[0]
-                                    ? `http://localhost:5000/images/${item.product.image[0]}`
-                                    : "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food"
+                                  item.product && (
+                                    (typeof item.product.image === "string" && item.product.image.startsWith("http"))
+                                      ? item.product.image
+                                      : (Array.isArray(item.product.image) && item.product.image[0])
+                                        ? `http://localhost:5000/images/${item.product.image[0]}`
+                                        : "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food"
+                                  ) || "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food"
                                 }
-                                alt={item.product.name}
+                                alt={item.product ? item.product.name : "No product"}
                                 className="w-16 h-16 object-cover rounded-lg  bg-gray-50 border border-white flex-shrink-0"
                               />
                               <div className="flex-1">

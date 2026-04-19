@@ -9,9 +9,11 @@ const ProductCategory = () => {
     (item) => item.path.toLowerCase() === category
   );
 
-  const filteredProducts = products.filter(
-    (product) => product.category.toLowerCase() === category
-  );
+  const filteredProducts = products && products.length > 0 
+    ? products.filter(
+        (product) => product?.category?.toLowerCase() === category
+      )
+    : [];
   return (
     <div className="mt-10 w-full bg-white border border-gray-100 px-4 py-10 rounded-xl shadow">
       {searchCategory && (
