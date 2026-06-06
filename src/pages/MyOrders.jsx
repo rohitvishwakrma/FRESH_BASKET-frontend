@@ -5,10 +5,12 @@ import toast from "react-hot-toast";
 import "remixicon/fonts/remixicon.css";
 import "remixicon/fonts/remixicon.css";
 import { getProductImageUrl } from "../utils/getProductImageUrl";
+import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const { axios, user, setCartItems } = useContext(AppContext);
+  const navigate = useNavigate();
   const [reorderQuantities, setReorderQuantities] = useState({});
   const [expandedOrder, setExpandedOrder] = useState(null);
 
@@ -103,7 +105,10 @@ const MyOrders = () => {
             <p className="mt-1 text-sm text-gray-500">
               Your order history will appear here once you start ordering.
             </p>
-            <button className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition ">
+            <button
+              onClick={() => navigate("/products")}
+              className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+            >
               Order Now
             </button>
           </div>
