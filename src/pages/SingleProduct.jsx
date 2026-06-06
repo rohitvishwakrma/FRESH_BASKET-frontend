@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import { getProductImageUrl } from "../utils/getProductImageUrl";
 
 
 const SingleProduct = () => {
@@ -69,7 +70,7 @@ const SingleProduct = () => {
       <div className="max-w-3xl w-full bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row gap-8">
         <div className="flex-shrink-0 flex items-center justify-center">
           <img
-            src={Array.isArray(product.image) && product.image[0] ? `http://localhost:5000/images/${product.image[0]}` : "https://via.placeholder.com/256?text=No+Image"}
+            src={getProductImageUrl(product.image)}
             alt={product.name}
             className="w-64 h-64 object-cover rounded-lg border border-gray-50 bg-gray-50"
           />

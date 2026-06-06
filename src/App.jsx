@@ -55,19 +55,12 @@ const App = () => {
   const location=useLocation();
   
   // hidden path
-  const hideFooterPaths=["/About","/Careers","/Blog","/Partners","/Article  "];
+  const hideFooterPaths=["/About","/Careers","/Blog","/Partners","/article"];
   const shouldHideFooter = hideFooterPaths.includes(location.pathname);
 
   useEffect(() => {
-    if (shouldHideFooter) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [shouldHideFooter]);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   return (
     <ErrorBoundary>
       <div className="text-default min-h-screen">
@@ -99,7 +92,7 @@ const App = () => {
             <Route path="/Careers" element={<Career />} />
             <Route path="/seller/login" element={<PartnerLogin />} />
             <Route path="/career" element={<CareerPage />} />
-            <Route path="/Article" element={<Article />} />   
+            <Route path="/article" element={<Article />} />   
             <Route path="/Blog" element={<Blog />} />
             <Route path="/Partners" element={<Partners />} />
             <Route path="/partner-login" element={<PartnerLogin />} />

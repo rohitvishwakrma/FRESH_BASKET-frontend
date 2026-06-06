@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 import "remixicon/fonts/remixicon.css";
 import "remixicon/fonts/remixicon.css";
+import { getProductImageUrl } from "../utils/getProductImageUrl";
 
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
@@ -117,7 +118,7 @@ const MyOrders = () => {
                 <div className="p-4 sm:p-6 border-b border-gray-200">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center">
-                      <div className="mr-4 flex-shrink-0">
+                      <div className="mr-4 shrink-0">
                         <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
                           <span className="text-red-800 font-medium">
                             #{idx + 1}
@@ -193,17 +194,9 @@ const MyOrders = () => {
                           >
                             <div className="flex items-start gap-4 flex-1">
                               <img
-                                src={
-                                  item.product && (
-                                    (typeof item.product.image === "string" && item.product.image.startsWith("http"))
-                                      ? item.product.image
-                                      : (Array.isArray(item.product.image) && item.product.image[0])
-                                        ? `http://localhost:5000/images/${item.product.image[0]}`
-                                        : "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food"
-                                  ) || "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food"
-                                }
+                                src={getProductImageUrl(item.product?.image, "https://via.placeholder.com/80x80/f8f9fa/6c757d?text=Food")}
                                 alt={item.product ? item.product.name : "No product"}
-                                className="w-16 h-16 object-cover rounded-lg  bg-gray-50 border border-white flex-shrink-0"
+                                className="w-16 h-16 object-cover rounded-lg  bg-gray-50 border border-white shrink-0"
                               />
                               <div className="flex-1">
                                 <div className="font-medium text-gray-900">

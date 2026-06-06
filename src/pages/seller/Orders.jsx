@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
 
 const AddProduct = () => {
-  const { axios, refreshProducts, fetchProducts } = useContext(AppContext); // ✅ Add refreshProducts
+  const { axios, refreshProducts, fetchProducts } = useContext(AppContext); //  Add refreshProducts
   const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -12,12 +12,12 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const [loading, setLoading] = useState(false); // ✅ Add loading state
+  const [loading, setLoading] = useState(false); //  Add loading state
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      setLoading(true); // ✅ Start loading
+      setLoading(true); //  Start loading
 
       const formData = new FormData();
       formData.append("name", name);
@@ -31,7 +31,7 @@ const AddProduct = () => {
         formData.append("image", files[i]);
       }
 
-      // ✅ Add seller token in headers
+      //  Add seller token in headers
       const sellerToken = localStorage.getItem('sellerToken');
       const { data } = await axios.post("/api/product/add-product", formData, {
         headers: {
@@ -43,14 +43,14 @@ const AddProduct = () => {
       if (data.success) {
         toast.success(data.message || "Product added successfully!");
         
-        // ✅ Refresh products in home page
+        //  Refresh products in home page
         if (refreshProducts) {
           await refreshProducts(); // This will fetch updated products
         } else if (fetchProducts) {
           await fetchProducts(); // Fallback
         }
         
-        // ✅ Reset form
+        //  Reset form
         setName("");
         setDescription("");
         setCategory("");
@@ -59,7 +59,7 @@ const AddProduct = () => {
         setFiles([]);
         setExpiryDate("");
         
-        // ✅ Optional: Navigate to products page
+        //  Optional: Navigate to products page
         // navigate("/seller/products");
         
       } else {
@@ -69,7 +69,7 @@ const AddProduct = () => {
       console.error("Upload error:", error);
       toast.error(error.response?.data?.message || error.message || "Failed to add product");
     } finally {
-      setLoading(false); // ✅ Stop loading
+      setLoading(false); //  Stop loading
     }
   };
 

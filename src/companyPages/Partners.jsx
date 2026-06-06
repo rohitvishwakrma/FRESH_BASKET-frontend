@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
+const resolvePartnerDocumentUrl = (document) => {
+  if (!document) return "";
+  if (/^(https?:|data:|blob:)/i.test(document)) return document;
+  if (document.startsWith("/")) return document;
+  return `/uploads/partners/${document}`;
+};
+
 export default function Partners() {
   const navigate = useNavigate();
   const [partners, setPartners] = useState([]);
@@ -89,7 +96,7 @@ export default function Partners() {
               className="flex flex-col items-center bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all"
             >
               <img
-                src={partner.document ? `/uploads/partners/${partner.document}` : `https://placehold.co/150x150?text=${encodeURIComponent(partner.businessName)}`}
+                src={partner.document ? resolvePartnerDocumentUrl(partner.document) : `https://placehold.co/150x150?text=${encodeURIComponent(partner.businessName)}`}
                 alt={partner.businessName}
                 className="w-32 h-32 object-contain mb-4"
               />
@@ -133,7 +140,7 @@ export default function Partners() {
                 <td className="p-2">{partner.message}</td>
                 <td className="p-2">
                   {partner.document ? (
-                    <a href={`/uploads/partners/${partner.document}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>
+                    <a href={resolvePartnerDocumentUrl(partner.document)} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View</a>
                   ) : "-"}
                 </td>
                 <td className="p-2">

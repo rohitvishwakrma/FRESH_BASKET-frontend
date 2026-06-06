@@ -9,25 +9,26 @@ export default function About() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
+      className="min-h-screen"
     >
       <div
-        className="min-h-screen bg-cover bg-center w-full flex justify-center items-center overflow-y-auto"
+        className="min-h-screen bg-cover bg-center bg-fixed w-full flex justify-center items-start overflow-y-auto px-4 py-6 sm:px-6 sm:py-10 lg:px-8 lg:py-14"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1543362906-acfc16c67564?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDc4fHxmcnVpdHN8ZW58MHx8MHx8fDA%3D')",
         }}
       >
-        <div className="max-w-4xl bg-white shadow-xl rounded-3xl p-10 text-gray-800 w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <h1 className="text-5xl font-extrabold text-indigo-600 mb-6 text-center">
+        <div className="max-w-4xl bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl p-6 sm:p-8 lg:p-10 text-gray-800 w-full sm:w-11/12 md:w-5/6 lg:w-1/2 mt-2 sm:mt-0">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-indigo-600 mb-5 sm:mb-6 text-center leading-tight">
             About Me & My Project
           </h1>
-          <p className="text-lg leading-relaxed mb-6">
+          <p className="text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
             Hi! I’m <span className="font-semibold text-pink-500">Rohit Vishwakarma</span>, a passionate web developer focused on building smooth and reliable user experiences.
           </p>
-          <p className="text-lg leading-relaxed mb-6">
+          <p className="text-base sm:text-lg leading-relaxed mb-5 sm:mb-6">
             This project is a modern grocery delivery app called{' '}
             <a href="/products" className="font-semibold text-indigo-600 hover:underline">
               Fresh Basket
@@ -35,8 +36,8 @@ export default function About() {
             , designed to bring fresh groceries right to your doorstep with quality and convenience.
           </p>
 
-          <h2 className="text-2xl font-bold mt-10 mb-4 text-indigo-700">Technologies Used</h2>
-          <ul className="grid grid-cols-3 gap-6 mb-8 text-indigo-800 text-lg">
+          <h2 className="text-xl sm:text-2xl font-bold mt-8 sm:mt-10 mb-4 text-indigo-700">Technologies Used</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 text-indigo-800 text-base sm:text-lg">
             <li className="flex items-center gap-3">
               <FaReact className="text-blue-500 w-7 h-7" />
               <a
@@ -105,8 +106,8 @@ export default function About() {
             </li>
           </ul>
 
-          <h2 className="text-2xl font-bold mb-4 text-indigo-700">Connect with me</h2>
-          <div className="flex justify-center gap-8 mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 text-indigo-700">Connect with me</h2>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8">
             <a
               href="https://github.com/rohitvishwakrma"
               target="_blank"

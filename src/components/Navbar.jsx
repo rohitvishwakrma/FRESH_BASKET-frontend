@@ -103,7 +103,7 @@ const Navbar = () => {
             />
           </svg>
           {cartCount() > 0 && (
-            <span className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full flex items-center justify-center">
+            <span className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-4.5 h-4.5 rounded-full flex items-center justify-center">
               {cartCount()}
             </span>
           )}
@@ -145,7 +145,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Button */}
-      <div className="flex items-center gap-6 md:hidden">
+      <div className="flex items-center gap-6 sm:hidden">
         {/* Mobile Cart Icon - Corrected SVG attributes */}
         <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
           <svg
@@ -164,7 +164,7 @@ const Navbar = () => {
             />
           </svg>
           {cartCount() > 0 && (
-            <span className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full flex items-center justify-center">
+            <span className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-4.5 h-4.5 rounded-full flex items-center justify-center">
               {cartCount()}
             </span>
           )}
@@ -192,9 +192,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`${
-          open ? "flex" : "hidden"
-        } absolute top-[60px] left-0 w-full bg-white shadow-lg py-4 flex-col items-start gap-4 px-5 text-sm md:hidden z-30`}
+        className={`${open ? "flex" : "hidden"} absolute top-15 left-0 w-full bg-white shadow-lg py-4 flex-col items-start gap-4 px-5 text-sm sm:hidden z-30`}
       >
         <Link 
           onClick={() => setOpen(false)} 

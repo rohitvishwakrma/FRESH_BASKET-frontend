@@ -1,5 +1,5 @@
 import { createContext, use, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -11,9 +11,11 @@ if (token) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 export const AppContext = createContext(null);
+const SELLER_AUTH_FLAG = "sellerAuth";
 
 export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(null);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
@@ -27,11 +29,14 @@ export const AppContextProvider = ({ children }) => {
       const { data } = await axios.get("/api/seller/is-auth");
       if (data.success) {
         setIsSeller(true);
+        localStorage.setItem(SELLER_AUTH_FLAG, "true");
       } else {
         setIsSeller(false);
+        localStorage.removeItem(SELLER_AUTH_FLAG);
       }
     } catch (error) {
       setIsSeller(false);
+      localStorage.removeItem(SELLER_AUTH_FLAG);
     }
   };
 
@@ -126,10 +131,17 @@ export const AppContextProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    fetchSeller();
+    const isSellerRoute = location.pathname.startsWith("/seller");
+    const hasSellerSession = localStorage.getItem(SELLER_AUTH_FLAG) === "true";
+
+    if (isSellerRoute || hasSellerSession) {
+      fetchSeller();
+    } else {
+      setIsSeller(false);
+    }
     fetchProducts();
     fetchUser();
-  }, []);
+  }, [location.pathname]);
 
   // update database cart items
   useEffect(() => {
@@ -169,6 +181,7 @@ export const AppContextProvider = ({ children }) => {
     axios,
     fetchProducts,
     setCartItems,
+    sellerAuthFlag: SELLER_AUTH_FLAG,
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

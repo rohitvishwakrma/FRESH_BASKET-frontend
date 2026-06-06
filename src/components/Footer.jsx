@@ -186,13 +186,13 @@ const TermsPolicyLink = [
 const Footer = () => {
   return (
     <footer className="mt-16 object-cover bg-white flex justify-center border-e-0 border-gray-200">
-      <div className="bg-gradient-to-tr from-indigo-400 via-purple-500/9 to-pink-700 p-1 rounded-3xl shadow-2xl px-10 transition-all duration-500">
+      <div className="bg-linear-to-tr from-indigo-400 via-purple-500/9 to-pink-700 p-1 rounded-3xl shadow-2xl px-10 transition-all duration-500">
         <div className="bg-white/55 dark:bg-gray-100 rounded-3xl p-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-gray-900">
 
             {/* Brand Info */}
             <div className="w-full text-center lg:text-left transition-all duration-500 hover:scale-111 bg-white/55 rounded-xl shadow-lg">
-              <h1 className="text-3xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">Fresh Basket</h1>
+              <h1 className="text-3xl font-extrabold tracking-wide bg-clip-text text-transparent bg-linear-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">Fresh Basket</h1>
               <p className="text-base dark:text-gray-900 text-center lg:text-left mb-10 leading-relaxed pb-4 px-10">
                 Bringing fresh groceries right to your doorstep. Freshness you can trust, service you can love.
               </p>
@@ -228,7 +228,7 @@ const Footer = () => {
 
             {/* Company Links */}
             <div className="w-full text-center lg:text-left transition-all duration-500 hover:scale-111 bg-white/55 px-2 rounded-xl shadow-lg">
-              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">COMPANY</p>
+              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-linear-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">COMPANY</p>
               <ul className="mt-4 flex flex-col gap-3 lg:text-left px-10 text-base">
                 {companyLinks.map(({ name, path }) => (
                   <li key={name}>
@@ -243,7 +243,7 @@ const Footer = () => {
 
             {/* Support Links */}
             <div className="w-full text-center lg:text-left transition-all duration-500 hover:scale-111 bg-white/55 px-2 rounded-xl shadow-lg">
-              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">SUPPORT</p>
+              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-linear-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">SUPPORT</p>
               <ul className="flex flex-col gap-3 lg:text-left px-10 text-base">
                 {supportLinks.map(({ name, path }) => (
                   <li key={name}>
@@ -258,7 +258,7 @@ const Footer = () => {
 
             {/* Stay Updated */}
             <div className="w-full text-center lg:text-left transition-all duration-500 hover:scale-111 bg-white/55 px-2 rounded-xl wrap-break-word shadow-lg hover:shadow-x">
-              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">STAY UPDATED</p>
+              <p className="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-linear-to-r border-b-2 border-indigo-500 pb-2 from-indigo-500 to-pink-500 my-5 text-center">STAY UPDATED</p>
               <p className="text-base text-gray-600 dark:text-gray-900 text-center lg:text-left leading-relaxed px-5">
                 Subscribe to our newsletter for inspiration and special offers.
               </p>

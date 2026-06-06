@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 import "remixicon/fonts/remixicon.css";
+import { getProductImageUrl } from "../utils/getProductImageUrl";
 
 const Cart = () => {
   const {
@@ -195,7 +196,7 @@ const razorpayPayment = async () => {
               >
                 <img
                   className="max-w-full h-full object-contain bg-white"
-                  src={`${import.meta.env.VITE_BACKEND_URL}/images/${product.image[0]}`}
+                  src={getProductImageUrl(product.image)}
                   alt={product.name}
                 />
               </div>

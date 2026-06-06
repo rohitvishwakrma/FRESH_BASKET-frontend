@@ -1,5 +1,6 @@
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { getProductImageUrl } from "../utils/getProductImageUrl";
 import "remixicon/fonts/remixicon.css";
 
 const ProductCard = ({ product }) => {
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
                         h-28 sm:h-32 md:h-36">
           <img
             className="group-hover:scale-105 transition-transform duration-300 object-contain max-h-full max-w-full"
-            src={`http://localhost:5000/images/${product.image[0]}`}
+            src={getProductImageUrl(product.image)}
             alt={product.name}
           />
         </div>
